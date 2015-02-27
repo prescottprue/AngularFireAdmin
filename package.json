@@ -1,0 +1,34 @@
+{
+  "name": "AngularFireAdmin",
+  "version": "1.0.0",
+  "description": "Angular integration for FireAdmin library.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prescottprue/AngularFireAdmin"
+  },
+  "keywords": [
+    "Fireadmin",
+    "Angular"
+  ],
+  "author": "Prescott Prue <sprue.dev@gmail.com> (http://prescottprue.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prescottprue/AngularFireAdmin/issues"
+  },
+  "homepage": "https://github.com/prescottprue/AngularFireAdmin",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bump": "^0.1.0",
+    "grunt-closure-compiler": "0.0.21",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jsdoc": "^0.5.7",
+    "grunt-shell": "^1.1.2",
+    "load-grunt-tasks": "^3.1.0"
+  }
+}
