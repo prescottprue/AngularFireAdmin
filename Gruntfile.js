@@ -100,7 +100,7 @@ module.exports = function(grunt) {
         // },
         jsdoc: {
           dev:{
-            src: ['<%= config.devFolder %>/fireadmin.js'],
+            src: ['<%= config.devFolder %>/fa.js'],
             options: {
               destination: '<%= config.distFolder %>/docs',
               template:'node_modules/grunt-jsdoc/node_modules/ink-docstrap/template',
@@ -149,8 +149,8 @@ module.exports = function(grunt) {
             '--js_output_file=dist/fireadmin.min.js <%= config.devFolder %>/fa.js  --define="DEBUG=false" '+
             '--only_closure_dependencies --closure_entry_point=faModule <%= config.devFolder %>/closure-library/** ' +
             '--warning_level=VERBOSE --compilation_level=SIMPLE_OPTIMIZATIONS '+
-            ' --angular_pass --externs <%= env.CLOSURE_PATH %>/externs/angular.js --generate_exports '+ //Angular
-            '--externs <%= config.devFolder %>/lib/angular.js --externs <%= config.devFolder %>/lib/firebase.js'
+            ' --angular_pass --externs <%= env.CLOSURE_PATH %>/externs/angular.js --generate_exports ' //Angular
+            // '--externs <%= config.devFolder %>/lib/angular.js --externs <%= config.devFolder %>/lib/firebase.js'
           }
         }
 
