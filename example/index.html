@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Angular Fireadmin Demo</title>
+		<title>Fireadmin Example App</title>
 		<script src="https://cdn.firebase.com/js/client/2.1.2/firebase.js"></script>
 		<script src="closure-library/closure/goog/base.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
@@ -13,16 +13,6 @@
 	</head>
 	<body ng-app="faApp">
 		<div ng-controller="MainCtrl">
-			Total Users: {{userCount}} <br>
-			Average Session Length: ~ {{sessionLength}} mins
 		</div>
-				<script>
-					angular.module('faApp', ['fireadmin'])
-					.controller('MainCtrl', function($scope, $fa){
-						console.log('fa:',$fa("https://pyro-vcguy.firebaseio.com"));
-							var fa = new Fireadmin("https://pyro-vcguy.firebaseio.com")
-					});
-		</script>
-<script src="//localhost:35729/livereload.js"></script>
 	</body>
 </html>

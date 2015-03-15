@@ -44,7 +44,6 @@ Angular integration for [Fireadmin Library](https://github.com/prescottprue/fire
   ```javascript
   .controller('LoginCtrl', ['$scope','sessionService', function($scope, sessionService){
     console.log('AccountCtrl');
-
     $scope.loginData = {};
     $scope.emailLogin = function(){
       sessionService.emailLogin($scope.loginData).then(function(){
