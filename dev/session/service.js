@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   /**
-   *
+   * Session Service
    */
   angular.module('fireadmin')
   .factory('sessionService', ['$q','$firebaseAuth', function($q, $firebaseAuth) {

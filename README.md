@@ -14,10 +14,9 @@ Angular integration for [Fireadmin Library](https://github.com/prescottprue/fire
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
   <!-- AngularFireAdmin-->
-  <script src="https://s3.amazonaws.com/prescottprue/angular-fireadmin/current/angular-fireadmin.min.js"></script>
+  <script src="https://s3.amazonaws.com/prescottprue/angularfireadmin/current/fireadmin-bundle.js"></script>
 
   ```
-  *Working on a bundled file*
 
 2. Include `'fireadmin'` and `'fireadmin'` in your app dependencies:
   ```javascript

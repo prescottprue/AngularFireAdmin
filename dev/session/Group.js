@@ -2,7 +2,7 @@
   'use strict';
   /**
    * Extend a Firebase reference to include Group functionality/methods
-   * @param {Firebase Reference} fbRef Firebase reference to turn into a "Group"
+   * @param {Object} fbRef Firebase reference to turn into a "Group"
    * @returns Group Firebase Object
    */
   angular.module('fireadmin')
@@ -69,7 +69,7 @@
   }])
   /**
    * Extend a Firebase reference to include GroupsArray functionality/methods
-   * @param {Firebase Reference} fbRef Firebase reference to turn into a "GroupsArray"
+   * @param {Object} fbRef Firebase reference to turn into a "GroupsArray"
    * @returns Groups Firebase Array
    */
   .factory('GroupsArray', ['$firebaseArray', '$q', 'GroupFactory', function($firebaseArray, $q, GroupFactory){

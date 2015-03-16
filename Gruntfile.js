@@ -97,7 +97,7 @@ module.exports = function(grunt) {
               '<%= config.devFolder %>/fa.js'
 
             ],
-            dest: '<%= config.distFolder %>/angular-fireadmin.js'
+            dest: '<%= config.distFolder %>/angularfireadmin.js'
           },
           bundle: {
             // options: { banner: '<%= meta.banner %>' },
@@ -106,10 +106,10 @@ module.exports = function(grunt) {
               'bower_components/firebase/firebase.js',
               'bower_components/angularfire/dist/angularfire.min.js',
               '<%= config.devFolder %>/lib/*.js',
-              '<%= config.distFolder %>/angular-fireadmin.min.js'
+              '<%= config.distFolder %>/angularfireadmin.min.js'
               
             ],
-            dest: '<%= config.distFolder %>/angular-fireadmin-bundle.js'
+            dest: '<%= config.distFolder %>/fireadmin-bundle.js'
           }
         },
         uglify:{
@@ -120,13 +120,13 @@ module.exports = function(grunt) {
           },
           dist:{
             files:{
-              '<%= config.distFolder %>/angular-fireadmin.min.js': ['<%= config.distFolder %>/angular-fireadmin.js']
+              '<%= config.distFolder %>/angularfireadmin.min.js': ['<%= config.distFolder %>/angularfireadmin.js']
             }
           }
         },
         jsdoc: {
           dev:{
-            src: ['<%= config.devFolder %>/fa.js'],
+            src: ['<%= config.devFolder %>/fa.js', '<%= config.devFolder %>/session/**/*.js'],
             options: {
               destination: '<%= config.distFolder %>/docs',
               template:'node_modules/grunt-jsdoc/node_modules/ink-docstrap/template',
@@ -148,15 +148,6 @@ module.exports = function(grunt) {
             gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
             globalReplace: false
           }
-        },
-        shell:{
-          compile:{
-            command:'java -jar <%= env.CLOSURE_PATH %>/build/compiler.jar ' +
-            '--js_output_file=dist/fireadmin.min.js <%= config.devFolder %>/fa.js  --define="DEBUG=false" '+
-            '--only_closure_dependencies --closure_entry_point=faModule <%= config.devFolder %>/closure-library/** ' +
-            '--warning_level=VERBOSE --compilation_level=SIMPLE_OPTIMIZATIONS '+
-            ' --angular_pass --externs <%= env.CLOSURE_PATH %>/externs/angular.js --generate_exports ' //Angular
-          },
         }
     });
 
