@@ -99,7 +99,6 @@ module.exports = function(grunt) {
               '<%= config.devFolder %>/lib/firebase/firebase.js',
               '<%= config.devFolder %>/lib/angularfire/dist/angularfire.min.js',
               '<%= config.devFolder %>/lib/fireadmin/dist/fireadmin.js',
-
               '<%= config.distFolder %>/<%= config.fileName %>.min.js'
               
             ],

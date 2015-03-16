@@ -16,7 +16,7 @@
     "angularfire": "1.0.0",
     "angular-ui-router": "~0.2.13",
     "firebase": "~2.2.2",
-    "fireadmin":"~0.0.1"
+    "fireadmin":"~0.0.2"
   },
   "keywords": [
     "firebase",
@@ -34,6 +34,7 @@
     "bower_components",
     "test",
     "tests",
-    "env.json"
+    "env.json",
+    "dev/**"
   ]
 }
