@@ -78,14 +78,7 @@ module.exports = function(grunt) {
             ]
           }
         },
-        // copy: {
-        //   dist: {
-        //     files: [
-        //       {expand: true, cwd: './<%= config.devFolder %>', src:'*.js', dest: '<%= config.distFolder %>'}
-        //     ],
-        //   },
-        // },
-            // merge files from src/ into angularfire.js
+        // merge files from src/ into angularfire.js
         concat: {
           app: {
             // options: { banner: '<%= meta.banner %>' },
@@ -97,7 +90,7 @@ module.exports = function(grunt) {
               '<%= config.devFolder %>/fa.js'
 
             ],
-            dest: '<%= config.distFolder %>/angularfireadmin.js'
+            dest: '<%= config.distFolder %>/<%= config.fileName %>.js'
           },
           bundle: {
             // options: { banner: '<%= meta.banner %>' },
@@ -106,10 +99,10 @@ module.exports = function(grunt) {
               'bower_components/firebase/firebase.js',
               'bower_components/angularfire/dist/angularfire.min.js',
               '<%= config.devFolder %>/lib/*.js',
-              '<%= config.distFolder %>/angularfireadmin.min.js'
+              '<%= config.distFolder %>/<%= config.fileName %>.min.js'
               
             ],
-            dest: '<%= config.distFolder %>/fireadmin-bundle.js'
+            dest: '<%= config.distFolder %>/<%= config.fileName %>-bundle.js'
           }
         },
         uglify:{
@@ -120,7 +113,7 @@ module.exports = function(grunt) {
           },
           dist:{
             files:{
-              '<%= config.distFolder %>/angularfireadmin.min.js': ['<%= config.distFolder %>/angularfireadmin.js']
+              '<%= config.distFolder %>/<%= config.fileName %>.min.js': ['<%= config.distFolder %>/<%= config.fileName %>.js']
             }
           }
         },
