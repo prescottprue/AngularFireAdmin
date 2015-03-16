@@ -1,6 +1,8 @@
 # AngularFireAdmin
 
 Angular integration for [Fireadmin Library](https://github.com/prescottprue/fireadmin).
+
+>>>>>>> Switched fileName to config variable. Updated readme to reflect new file name of bundle file.
 ## Getting Started
 1. Include the bundle file in your `index.html` :
   ```html

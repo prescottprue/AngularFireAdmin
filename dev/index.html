@@ -6,28 +6,60 @@
 		<!-- AngularFire -->
 		<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 		<script src="https://s3.amazonaws.com/prescottprue/Fireadmin/current/fireadmin.min.js"></script>
-		<script src="http://localhost:35729/livereload.js?snipver=1"></script>
 
 		<!-- Files -->
 		<script src="module.js"></script>
-
 		<script src="session/User.js"></script>
 		<script src="session/Group.js"></script>
 		<script src="session/service.js"></script>
 		<script src="fa.js"></script>
 		<!-- Angular Integration -->
 	</head>
+		<style>
+			body{
+				text-align:center;
+			}
+			.appName {
+				font-size:1.5em;
+				color:#00FFFF;
+			}
+			.appUrl {
+				font-size:1.5em;
+				color:#00FF00;
+			}
+		</style>
+	</head>
 	<body ng-app="faApp">
 		<div ng-controller="MainCtrl">
-			Total Users: {{userCount}} <br>
-			Average Session Length: ~ {{sessionLength}} mins
+			<h1>Fireadmin</h1>
+			<h3>App: <span class="appName">{{appName}}<span></h3>
+			<h3>Url: <span class="appUrl">{{appUrl}}<span></h3>
+
+			Total Users: {{userCount || "No Users Found"}} <br>
 		</div>
 				<script>
-					angular.module('faApp', ['fireadmin'])
-					.controller('MainCtrl', function($scope, $fa){
-						console.log('fa:',$fa("https://pyro-vcguy.firebaseio.com"));
+					angular.module('faApp', [])
+					.controller('MainCtrl', function($scope){
+
+							$scope.appName = fa.appName;
+							$scope.appUrl = fa.fbUrl;
+							$scope.userCount = "loading...";
+							fa.getUserCount(function(count){
+								console.log('count:', count);
+								$scope.userCount = count;
+								$scope.$apply();
+							});
+							//Sessions Since A month Ago
+							// var dt = new Date();
+							// dt.setMonth(dt.getMonth()-1);
+							// fa.sessionsSince(dt.getTime(), function(sessionCount){
+							// 	console.log('sessions:', sessionCount)
+							// }, function(err){
+							// 	console.error('error', err);
+							// });
+							// fa.removeUserSessions("simplelogin:1");
 					});
-		</script>
-<script src="//localhost:35729/livereload.js"></script>
+				</script>
+		<script src="//localhost:35729/livereload.js?snipver=1"></script>
 	</body>
 </html>

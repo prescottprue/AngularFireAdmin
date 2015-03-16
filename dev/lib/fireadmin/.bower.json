@@ -1,0 +1,14 @@
+{
+  "name": "fireadmin",
+  "homepage": "https://github.com/prescottprue/FireAdmin",
+  "version": "0.0.1",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "dce4bc48fb01ffeda0d76800693ffdcf18b7a223"
+  },
+  "_source": "git://github.com/prescottprue/FireAdmin.git",
+  "_target": "~0.0.1",
+  "_originalSource": "fireadmin"
+}

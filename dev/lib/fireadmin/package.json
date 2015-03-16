@@ -1,0 +1,19 @@
+{
+  "name": "fireadmin",
+  "version": "0.0.1",
+  "description": "Library to simplify implementing standard app functionality when using Firebase (User/Presence Management, Object CRUD and Listing)",
+  "author": "Prescott Prue (prescottprue)",
+  "repository": "https://github.com/prescottprue/FireAdmin",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-aws-s3": "^0.11.0",
+    "grunt-bump": "^0.1.0",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jsdoc": "^0.5.7",
+    "grunt-shell": "^1.1.2",
+    "load-grunt-tasks": "^3.1.0"
+  }
+}
