@@ -1,6 +1,6 @@
 {
   "name": "angularfireadmin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Angular integration for FireAdmin library.",
    "homepage": "https://github.com/prescottprue/AngularFireAdmin",
   "repository":{
@@ -35,5 +35,5 @@
     "test",
     "tests",
     "env.json"
-  ],
+  ]
 }

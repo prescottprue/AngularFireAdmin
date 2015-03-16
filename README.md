@@ -2,9 +2,9 @@
 
 Angular integration for [Fireadmin Library](https://github.com/prescottprue/fireadmin).
 
->>>>>>> Switched fileName to config variable. Updated readme to reflect new file name of bundle file.
 ## Getting Started
 1. Include the bundle file in your `index.html` :
+  
   ```html
   <!-- Angular, Firebase, AngularFire, Fireadmin, and AngularFireAdmin Bundled together -->
   <script src="https://cdn.prescottprue.com/angularfireadmin/current/angularfireadmin-bundle.js"></script>
@@ -61,8 +61,6 @@ Angular integration for [Fireadmin Library](https://github.com/prescottprue/fire
   }])
   ```
 ## Planning
-
-* Bundled File (Firebase, Angular, Fireadmin,)
 
 
 *More coming soon...*

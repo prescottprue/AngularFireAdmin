@@ -157,8 +157,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('stage', ['build', 'aws_s3:stage']);
 
-    grunt.registerTask('release', ['stage','aws_s3:production']);
+    grunt.registerTask('version', ['stage','bump-only']);
 
-    grunt.registerTask('releaseVersion', ['stage','bump-only:prerelease', 'bump-commit', 'aws_s3:production']);
+    grunt.registerTask('releaseVersion', ['stage','bump-only', 'bump-commit', 'aws_s3:production']);
 
 };
