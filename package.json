@@ -1,10 +1,7 @@
 {
-  "name": "angular-fireadmin",
-  "version": "1.0.0",
+  "name": "angularfireadmin",
+  "version": "0.0.0",
   "description": "Angular integration for FireAdmin library.",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/prescottprue/AngularFireadmin"

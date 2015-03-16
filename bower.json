@@ -1,11 +1,39 @@
 {
-  "name": "angular-fireadmin",
+  "name": "angularfireadmin",
   "version": "0.0.0",
-  "description": "",
+  "description": "Angular integration for FireAdmin library.",
+   "homepage": "https://github.com/prescottprue/AngularFireAdmin",
+  "repository":{
+    "type":"git",
+    "url":"git://github.com/prescottprue/AngularFireAdmin.git"
+  },
+  "authors": [
+    "Scott Prue <sprue.dev@gmail.com> (http://prescottprue.com)"
+  ],
+  "main": "dist/angularfireadmin.js",
   "dependencies": {
     "angular": "~1.3.14",
     "angularfire": "1.0.0",
     "angular-ui-router": "~0.2.13",
-    "firebase": "~2.2.2"
-  }
+    "firebase": "~2.2.2",
+    "fireadmin":"~0.0.1"
+  },
+  "keywords": [
+    "firebase",
+    "angularfire",
+    "administration",
+    "users",
+    "user",
+    "management",
+    "angularjs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "env.json"
+  ],
 }

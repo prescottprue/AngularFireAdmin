@@ -7,7 +7,7 @@ Angular integration for [Fireadmin Library](https://github.com/prescottprue/fire
 1. Include the bundle file in your `index.html` :
   ```html
   <!-- Angular, Firebase, AngularFire, Fireadmin, and AngularFireAdmin Bundled together -->
-  <script src="https://s3.amazonaws.com/prescottprue/angularfireadmin/current/angularfireadmin-bundle.js"></script>
+  <script src="https://cdn.prescottprue.com/angularfireadmin/current/angularfireadmin-bundle.js"></script>
 
   ```
 

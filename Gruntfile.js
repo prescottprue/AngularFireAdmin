@@ -95,10 +95,11 @@ module.exports = function(grunt) {
           bundle: {
             // options: { banner: '<%= meta.banner %>' },
             src: [
-              'bower_components/angular/angular.min.js',
-              'bower_components/firebase/firebase.js',
-              'bower_components/angularfire/dist/angularfire.min.js',
-              '<%= config.devFolder %>/lib/*.js',
+              '<%= config.devFolder %>/lib/angular/angular.min.js',
+              '<%= config.devFolder %>/lib/firebase/firebase.js',
+              '<%= config.devFolder %>/lib/angularfire/dist/angularfire.min.js',
+              '<%= config.devFolder %>/lib/fireadmin/dist/fireadmin.js',
+
               '<%= config.distFolder %>/<%= config.fileName %>.min.js'
               
             ],
@@ -129,7 +130,7 @@ module.exports = function(grunt) {
         },
         bump:{
           options:{
-            files:['package.json'],
+            files:['package.json', 'bower.json'],
             updateConfigs:['pkg'],
             commit:true,
             commitMessage:'[RELEASE] Release v%VERSION%',
