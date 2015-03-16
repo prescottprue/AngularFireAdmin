@@ -1,37 +1,107 @@
 (function(exports){
   "user strict";
   //Define fireadmin module that all services are contained within
-  angular.module('fireadmin', [])
+  angular.module('fireadmin', ["firebase"])
   //[TODO] Look into how to use $window for this
   .value("Firebase", exports.Firebase)
-  .value("Firebase", exports.Fireadmin)
-
+  .value("Fireadmin", exports.Fireadmin)
 })(window);
-(function (exports) {
+(function(){
   'use strict';
+  /**
+   *
+   */
   angular.module('fireadmin')
-    .factory('$fa', ['sessionService', function (sessionService) {
-      exports.Fireadmin.prototype = {
-        $auth: function () {
-
+  .factory('sessionService', ['$q','$firebaseAuth', function($q, $firebaseAuth) {
+    return function(fa){
+      var auth = $firebaseAuth(fa.ref);
+      console.log('fa and auth', fa, auth);
+      var account = null;
+      return {
+        signup: function(argSignupData) {
+          var deferred = $q.defer();
+          console.log('[sessionService] $signup called', argSignupData);
+          fa.userSignup(argSignupData, function(userAccount) {
+            console.log('signup + login successful:', userAccount);
+            account = userAccount;
+            deferred.resolve(userAccount);
+          }, function(err) {
+            console.warn('pyroSignup returned:', err);
+            deferred.reject(err)
+          });
+          return deferred.promise;
         },
-        $session: function () {
-          return sessionService(this);
+        login:function(argLoginData) {
+          console.warn('[sessionService] $getUser called');
+          var deferred = $q.defer();
+          if(argLoginData == "object") {
+            fa.login(argLoginData, function(returnedAccount){
+              if(returnedAccount){
+                  account = returnedAccount;
+                  deferred.resolve(account);
+                } else {
+                  console.log('got null for returnedAccount:', returnedAccount);
+                  deferred.reject();
+                }
+            });
+          }
+          //Handle 3rd Party provider as string
+          else {
+            var enabledProviders = [
+              {name:'GitHub', value:'githubAuth()', lower:'github'},
+              {name:'Twitter', value:'twitterAuth()', lower:'twitter'},
+              {name:'Google', value:'googleAuth()', lower:'google'}
+            ];
+            var ind = goog.array.findIndex(enabledProviders, function(provider){ return argLoginData.toLowerCase() === provider.lower});
+            if(ind = -1){
+              console.error('Invalid Login Provider');
+              deferred.reject({message:"Invalid login provider.", status:"INVALID_PARAMS"});
+            }
+            var provider = enabledProviders[ind];
+            provider.value.apply(this, null);
+          }
+          return deferred.promise;
+        },
+        logout: function() {
+          var deferred = $q.defer();
+          auth = null;
+          account = null;
+          fa.ref.logout(function(){
+            deferred.resolve();
+          });
+          return deferred.promise;
+        },
+        getAuth:function() {
+          auth = fa.ref.getAuth();
+          return auth;
+        },
+        authPromise:function(){
+          var deferred = $q.defer();
+          deferred.resolve(fa.ref.getAuth());
+          return deferred.promise;
+        },
+        getCurrentUser: function() {
+          var deferred = $q.defer();
+          if(account != null) {
+            deferred.resolve(account);
+          }
+          else {
+            fa.getUser(function(returnedAccount){
+              if(returnedAccount){
+                account = returnedAccount;
+                deferred.resolve(account);
+              } else {
+                console.log('got null for returnedAccount:', returnedAccount);
+                deferred.reject(null);
+              }
+            });
+          }
+          return deferred.promise;
         }
       }
-      return function (url) {
-        return new exports.Fireadmin(url);
-      }
-    }])
-    /** Extend Fireadmin to includeFirebaseObject factory to include
-    */
-    .factory('FireAdminFactory', function () {
-      return function (url) {
-        return new exports.Fireadmin(url);
-      }
-    });
-})(window);
-
+    }
+  }]);
+})();
 (function(){
   'use strict';
   /**
@@ -39,7 +109,7 @@
    * @param {Firebase Reference} fbRef Firebase reference to turn into a "Group"
    * @returns Group Firebase Object
    */
-  angular.module('fireadmin.session')
+  angular.module('fireadmin')
   .factory('GroupFactory', ['$firebaseObject', '$q', function($firebaseObject, $q){
     return $firebaseObject.$extend({
       getMessages:function(){
@@ -146,7 +216,7 @@
   /**
    * Create a User that is a FirebaseObject that has been Extended to include user specific functionality
    */
-  angular.module('fireadmin.session')
+  angular.module('fireadmin')
   .factory('UserFactory', ['$firebaseObject', function($firebaseObject){
     return $firebaseObject().$extend({
       getUsername:function(){
@@ -172,100 +242,24 @@
     }
   }]);
 })();
-(function(){
-  'use strict';
-  /**
-   *
-   */
-  angular.module('fireadmin.session', ['firebase'])
-  .factory('sessionService', ['$q','$firebaseAuth', 'FireAdminFactory', function($q, $firebaseAuth, FireAdminFactory) {
-    return function(fa){
-      var fa = FireAdminFactory();
-      var auth = $firebaseAuth(fa.ref);
-      console.log('fa and auth', fa, auth);
-      var account = null;
-      return {
-        signup: function(argSignupData) {
-          var deferred = $q.defer();
-          console.log('[sessionService] $signup called', argSignupData);
-          fa.userSignup(argSignupData, function(userAccount) {
-            console.log('signup + login successful:', userAccount);
-            account = userAccount;
-            deferred.resolve(userAccount);
-          }, function(err) {
-            console.warn('pyroSignup returned:', err);
-            deferred.reject(err)
-          });
-          return deferred.promise;
-        },
-        login:function(argLoginData) {
-          console.warn('[sessionService] $getUser called');
-          var deferred = $q.defer();
-          if(argLoginData == "object") {
-            fa.login(argLoginData, function(returnedAccount){
-              if(returnedAccount){
-                  account = returnedAccount;
-                  deferred.resolve(account);
-                } else {
-                  console.log('got null for returnedAccount:', returnedAccount);
-                  deferred.reject();
-                }
-            });
-          }
-          //Handle 3rd Party provider as string
-          else {
-            var enabledProviders = [
-              {name:'GitHub', value:'githubAuth()', lower:'github'},
-              {name:'Twitter', value:'twitterAuth()', lower:'twitter'},
-              {name:'Google', value:'googleAuth()', lower:'google'}
-            ];
-            var ind = goog.array.findIndex(enabledProviders, function(provider){ return argLoginData.toLowerCase() === provider.lower});
-            if(ind = -1){
-              console.error('Invalid Login Provider');
-              deferred.reject({message:"Invalid login provider.", status:"INVALID_PARAMS"});
-            }
-            var provider = enabledProviders[ind];
-            provider.value.apply(this, null);
-          }
-          return deferred.promise;
-        },
-        logout: function() {
-          var deferred = $q.defer();
-          auth = null;
-          account = null;
-          fa.ref.logout(function(){
-            deferred.resolve();
-          });
-          return deferred.promise;
-        },
-        getAuth:function() {
-          auth = fa.ref.getAuth();
-          return auth;
-        },
-        authPromise:function(){
-          var deferred = $q.defer();
-          deferred.resolve(fa.ref.getAuth());
-          return deferred.promise;
-        },
-        getCurrentUser: function() {
-          var deferred = $q.defer();
-          if(account != null) {
-            deferred.resolve(account);
-          }
-          else {
-            fa.getUser(function(returnedAccount){
-              if(returnedAccount){
-                account = returnedAccount;
-                deferred.resolve(account);
-              } else {
-                console.log('got null for returnedAccount:', returnedAccount);
-                deferred.reject(null);
-              }
-            });
-          }
-          return deferred.promise;
-        }
+(function (exports) {
+  angular.module('fireadmin')
+    .factory('$fa', ['FireAdminFactory', function (FireAdminFactory) {
+      return function (url) {
+        return FireAdminFactory(url);
       }
-    }
-  }]);
-})();
+    }])
+    /** Extend Fireadmin to includeFirebaseObject factory to include
+    */
+    .factory('FireAdminFactory', ['sessionService', function (sessionService) {
+      return function (url) {
+        exports.Fireadmin.prototype.$auth = function () {
+          return $firebaseAuth(arguments);
+        };
+        exports.Fireadmin.prototype.$session = function () {
+          return sessionService;
+        };
+        return new exports.Fireadmin(url);
+      }
+    }]);
+})(window);

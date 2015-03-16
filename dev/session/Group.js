@@ -5,7 +5,7 @@
    * @param {Firebase Reference} fbRef Firebase reference to turn into a "Group"
    * @returns Group Firebase Object
    */
-  angular.module('fireadmin.session')
+  angular.module('fireadmin')
   .factory('GroupFactory', ['$firebaseObject', '$q', function($firebaseObject, $q){
     return $firebaseObject.$extend({
       getMessages:function(){

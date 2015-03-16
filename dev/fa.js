@@ -1,23 +1,21 @@
 (function (exports) {
-  'use strict';
   angular.module('fireadmin')
-    .factory('$fa', ['sessionService', function (sessionService) {
-      exports.Fireadmin.prototype = {
-        $auth: function () {
-
-        },
-        $session: function () {
-        }
-      }
+    .factory('$fa', ['FireAdminFactory', function (FireAdminFactory) {
       return function (url) {
-        return new exports.Fireadmin(url);
+        return FireAdminFactory(url);
       }
     }])
     /** Extend Fireadmin to includeFirebaseObject factory to include
     */
-    .factory('FireAdminFactory', function () {
+    .factory('FireAdminFactory', ['sessionService', function (sessionService) {
       return function (url) {
+        exports.Fireadmin.prototype.$auth = function () {
+          return $firebaseAuth(arguments);
+        };
+        exports.Fireadmin.prototype.$session = function () {
+          return sessionService;
+        };
         return new exports.Fireadmin(url);
       }
-    });
+    }]);
 })(window);

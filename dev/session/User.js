@@ -3,7 +3,7 @@
   /**
    * Create a User that is a FirebaseObject that has been Extended to include user specific functionality
    */
-  angular.module('fireadmin.session')
+  angular.module('fireadmin')
   .factory('UserFactory', ['$firebaseObject', function($firebaseObject){
     return $firebaseObject().$extend({
       getUsername:function(){

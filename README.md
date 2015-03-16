@@ -31,7 +31,7 @@ Angular integration for [Fireadmin Library](https://github.com/prescottprue/fire
     //Create fireadmin object
     var fa = $fa("https://<your-app>.firebaseio.com");
     //Make use of promises
-    fa.session.getCurrentUser().then(function(account){
+    fa.$session.getCurrentUser().then(function(account){
       console.log('Account for current user:', account);
       $scope.account = account;
     });

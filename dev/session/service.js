@@ -3,10 +3,9 @@
   /**
    *
    */
-  angular.module('fireadmin.session', ['firebase'])
-  .factory('sessionService', ['$q','$firebaseAuth', 'FireAdminFactory', function($q, $firebaseAuth, FireAdminFactory) {
+  angular.module('fireadmin')
+  .factory('sessionService', ['$q','$firebaseAuth', function($q, $firebaseAuth) {
     return function(fa){
-      var fa = FireAdminFactory();
       var auth = $firebaseAuth(fa.ref);
       console.log('fa and auth', fa, auth);
       var account = null;

@@ -10,11 +10,11 @@
 
 		<!-- Files -->
 		<script src="module.js"></script>
-		<script src="fa.js"></script>
-		<script src="session/module.js"></script>
+
 		<script src="session/User.js"></script>
 		<script src="session/Group.js"></script>
-
+		<script src="session/service.js"></script>
+		<script src="fa.js"></script>
 		<!-- Angular Integration -->
 	</head>
 	<body ng-app="faApp">
@@ -26,7 +26,6 @@
 					angular.module('faApp', ['fireadmin'])
 					.controller('MainCtrl', function($scope, $fa){
 						console.log('fa:',$fa("https://pyro-vcguy.firebaseio.com"));
-							var fa = new Fireadmin("https://pyro-vcguy.firebaseio.com")
 					});
 		</script>
 <script src="//localhost:35729/livereload.js"></script>

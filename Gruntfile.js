@@ -90,15 +90,21 @@ module.exports = function(grunt) {
           app: {
             // options: { banner: '<%= meta.banner %>' },
             src: [
-              '<%= config.devFolder %>/module.js', 
-              '<%= config.devFolder %>/fa.js', 
-              '<%= config.devFolder %>/session/**/*.js'
+              '<%= config.devFolder %>/module.js',
+              '<%= config.devFolder %>/session/service.js',
+              '<%= config.devFolder %>/session/Group.js',
+              '<%= config.devFolder %>/session/User.js',
+              '<%= config.devFolder %>/fa.js'
+
             ],
             dest: '<%= config.distFolder %>/angular-fireadmin.js'
           },
           bundle: {
             // options: { banner: '<%= meta.banner %>' },
             src: [
+              'bower_components/angular/angular.min.js',
+              'bower_components/firebase/firebase.js',
+              'bower_components/angularfire/dist/angularfire.min.js',
               '<%= config.devFolder %>/lib/*.js',
               '<%= config.distFolder %>/angular-fireadmin.min.js'
               
@@ -158,7 +164,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [ 'connect:dev', 'watch']);
     //Documentation, minify js, minify html
     // grunt.registerTask('build', ['jsdoc', 'closure-compiler']);
-    grunt.registerTask('build', ['jsdoc', 'concat','uglify']);
+    grunt.registerTask('build', ['jsdoc', 'uglify','concat']);
 
     grunt.registerTask('docs', ['jsdoc', 'connect:docs']);
 
