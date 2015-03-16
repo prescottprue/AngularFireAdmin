@@ -33,7 +33,6 @@ module.exports = function(grunt) {
           docs:{
             options: {
               port: '<%= config.docsPort %>',
-              // keepalive: true,
               livereload:true,
               base: '<%= config.distFolder %>/docs/',
               open: {
@@ -45,17 +44,8 @@ module.exports = function(grunt) {
         },
         watch: {
           js: {
-            files: ['<%= config.devFolder %>/fa.js'],
-            tasks:['jsdoc'],
-            options:{
-              livereload:{
-                port:35729
-              },
-            }
-          },
-          html: {
-            files: ['<%= config.devFolder %>/index.html'],
-            // tasks:[],
+            files: ['<%= config.devFolder %>/*.js'],
+            // tasks:[ 'connect:docs'],
             options:{
               livereload:{
                 port:35729
@@ -88,6 +78,46 @@ module.exports = function(grunt) {
             ]
           }
         },
+        // copy: {
+        //   dist: {
+        //     files: [
+        //       {expand: true, cwd: './<%= config.devFolder %>', src:'*.js', dest: '<%= config.distFolder %>'}
+        //     ],
+        //   },
+        // },
+            // merge files from src/ into angularfire.js
+        concat: {
+          app: {
+            // options: { banner: '<%= meta.banner %>' },
+            src: [
+              '<%= config.devFolder %>/module.js', 
+              '<%= config.devFolder %>/fa.js', 
+              '<%= config.devFolder %>/session/**/*.js'
+            ],
+            dest: '<%= config.distFolder %>/angular-fireadmin.js'
+          },
+          bundle: {
+            // options: { banner: '<%= meta.banner %>' },
+            src: [
+              '<%= config.devFolder %>/lib/*.js',
+              '<%= config.distFolder %>/angular-fireadmin.min.js'
+              
+            ],
+            dest: '<%= config.distFolder %>/angular-fireadmin-bundle.js'
+          }
+        },
+        uglify:{
+          options:{
+            compress:{
+              drop_console:true
+            }
+          },
+          dist:{
+            files:{
+              '<%= config.distFolder %>/angular-fireadmin.min.js': ['<%= config.distFolder %>/angular-fireadmin.js']
+            }
+          }
+        },
         jsdoc: {
           dev:{
             src: ['<%= config.devFolder %>/fa.js'],
@@ -113,26 +143,6 @@ module.exports = function(grunt) {
             globalReplace: false
           }
         },
-        // 'closure-compiler': {
-        //   Fireadmin: {
-        //     js: '<%= config.devFolder %>/fireadmin.js',
-        //     jsOutputFile: '<%= config.distFolder %>/fireadmin.min.js',
-        //     maxBuffer: 500,
-        //     options: {
-        //       compilation_level: 'SIMPLE_OPTIMIZATIONS',
-        //       language_in: 'ECMASCRIPT5_STRICT',
-        //     }
-        //   },
-        //   dev: {
-        //     js: '<%= config.devFolder %>/fireadmin.js',
-        //     jsOutputFile: '<%= config.devFolder %>/fireadmin.min.js',
-        //     maxBuffer: 500,
-        //     options: {
-        //       compilation_level: 'SIMPLE_OPTIMIZATIONS',
-        //       language_in: 'ECMASCRIPT5_STRICT',
-        //     }
-        //   }
-        // },
         shell:{
           compile:{
             command:'java -jar <%= env.CLOSURE_PATH %>/build/compiler.jar ' +
@@ -141,24 +151,14 @@ module.exports = function(grunt) {
             '--warning_level=VERBOSE --compilation_level=SIMPLE_OPTIMIZATIONS '+
             ' --angular_pass --externs <%= env.CLOSURE_PATH %>/externs/angular.js --generate_exports ' //Angular
           },
-          // compileBundle:{
-          //   command:'java -jar <%= env.CLOSURE_PATH %>/build/compiler.jar ' +
-          //   '--js_output_file=dist/angular-fireadmin.min.js <%= config.devFolder %>/fa.js  --define="DEBUG=false" '+
-          //   '--only_closure_dependencies --closure_entry_point=faModule <%= config.devFolder %>/closure-library/** ' +
-          //   '--warning_level=VERBOSE --compilation_level=SIMPLE_OPTIMIZATIONS '+
-          //   ' --angular_pass --externs <%= env.CLOSURE_PATH %>/externs/angular.js --generate_exports '+ //Angular
-          //   // '--externs bower_components/angular/angular.js --externs bower_components/angular-ui-router/release/angular-ui-router.min.js'+
-          //   ' --externs bower_components/firebase/firebase.js --externs bower_components/angularfire/dist/angularfire.min.js'
-          // },
         }
-
     });
 
     // Default task(s).
-    grunt.registerTask('default', [ 'jsdoc','connect:docs','connect:dev', 'watch']);
+    grunt.registerTask('default', [ 'connect:dev', 'watch']);
     //Documentation, minify js, minify html
     // grunt.registerTask('build', ['jsdoc', 'closure-compiler']);
-    grunt.registerTask('build', ['jsdoc', 'shell:compile']);
+    grunt.registerTask('build', ['jsdoc', 'concat','uglify']);
 
     grunt.registerTask('docs', ['jsdoc', 'connect:docs']);
 
